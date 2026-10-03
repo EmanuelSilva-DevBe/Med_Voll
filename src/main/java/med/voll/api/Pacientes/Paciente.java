@@ -1,49 +1,46 @@
-package med.voll.api.Medicos;
+package med.voll.api.Pacientes;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.api.Endereco.Endereco;
 
-@Entity(name = "Medico")
-@Table(name = "medicos")
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
-public class Medicos {
+@Getter
+@Entity(name = "Pacientes")
+@Table(name = "paciente")
+public class Paciente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    private String cpf;
+    private int idade;
     private String email;
     private String telefone;
-    private String crm;
-    @Enumerated(EnumType.STRING)
-    private Especialidade especialidade;
-    private boolean ativo;
+    private boolean ativo = true;
 
     @Embedded
     private Endereco endereco;
 
-    public Medicos(DadosMedicos dados) {
+    public Paciente(DadosPacientes dados) {
         this.nome = dados.nome();
-        this.crm = dados.crm();
+        this.cpf = dados.cpf();
+        this.idade = dados.idade();
         this.email = dados.email();
         this.telefone = dados.telefone();
-        this.especialidade = dados.especialidade();
         this.endereco = new Endereco(dados.endereco());
     }
 
-    public void atualizaInformacoes(DadosAtualizaMedicos dados) {
-        if (dados.nome() != null) {
+    public void atualizaDados(DadosAtualizaPaciente dados) {
+        if (dados.email() != null) {
+            this.email = dados.email();
+        }if (dados.nome() != null) {
             this.nome = dados.nome();
-        } if (dados.telefone() != null){
-            this.telefone = dados.telefone();
-        }if (dados.endereco() != null){
+        }if (dados.endereco() != null) {
             this.endereco.validaInformacoes(dados.endereco());
         }
 
@@ -51,6 +48,5 @@ public class Medicos {
 
     public void excluir() {
         this.ativo = false;
-
     }
 }
