@@ -11,7 +11,6 @@ public record DadosEndereco(
         String bairro,
 
         @NotBlank
-
         String cep,
 
         @NotBlank
