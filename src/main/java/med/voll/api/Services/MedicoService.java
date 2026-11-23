@@ -1,16 +1,13 @@
 package med.voll.api.Services;
 
-import med.voll.api.Endereco.DadosEndereco;
 import med.voll.api.Medicos.DadosAtualizaMedicos;
 import med.voll.api.Medicos.DadosMedicos;
 import med.voll.api.Medicos.ListaDadosMedicos;
 import med.voll.api.Medicos.Medicos;
-import med.voll.api.Respositorio.MedicoRespository;
+import med.voll.api.Repositorio.MedicoRespository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class MedicoService {
